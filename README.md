@@ -52,67 +52,58 @@ node app.js
 Az alkalmazás elérhető: [http://localhost:3000](http://localhost:3000)
 
 ## 📦 Adatbázis szerkezet
-A filmkatalogus adatbázis a következő táblákat tartalmazza:
 
-users
-id — automatikusan növekvő elsődleges kulcs
+A `filmkatalogus` adatbázis a következő táblákat tartalmazza:
 
-email — egyedi email cím, kötelező
+### `users`
 
-password — hashelt jelszó, kötelező
+- `id` — automatikusan növekvő elsődleges kulcs
+- `email` — egyedi email cím, kötelező
+- `password` — hashelt jelszó, kötelező
+- `name` — felhasználó neve (nem kötelező)
+- `role` — felhasználói szerep, `'user'` vagy `'admin'`, alapértelmezett `'user'`
 
-name — felhasználó neve (nem kötelező)
+### `movies`
 
-role — felhasználói szerep, 'user' vagy 'admin', alapértelmezett 'user'
+- `id` — automatikusan növekvő elsődleges kulcs
+- `title_hu` — film magyar címe, kötelező
+- `title_en` — film angol címe (nem kötelező)
+- `description` — film leírása
+- `year` — megjelenési év
+- `duration` — film hossza percben
+- `cover_image` — a borítókép relatív útvonala
 
-movies
-id — automatikusan növekvő elsődleges kulcs
+### `actors`
 
-title_hu — film magyar címe, kötelező
+- `id` — automatikusan növekvő elsődleges kulcs
+- `name` — színész neve, kötelező
 
-title_en — film angol címe (nem kötelező)
+### `movie_cast`
 
-description — film leírása
+- `id` — automatikusan növekvő elsődleges kulcs
+- `movie_id` — a film azonosítója (idegen kulcs a `movies` táblából)
+- `actor_id` — a színész azonosítója (idegen kulcs az `actors` táblából)
+- `role_name` — a színész szerepének neve a filmben
 
-year — megjelenési év
+### `reviews`
 
-duration — film hossza percben
+- `id` — automatikusan növekvő elsődleges kulcs
+- `user_id` — a felhasználó azonosítója (idegen kulcs a `users` táblából)
+- `movie_id` — a film azonosítója (idegen kulcs a `movies` táblából)
+- `text` — a kritika szövege
+- `created_at` — a kritika létrehozásának dátuma és ideje (alapértelmezett a beszúrás ideje)
 
-cover_image — a borítókép relatív útvonala
+### `ratings`
 
-actors
-id — automatikusan növekvő elsődleges kulcs
+- `id` — automatikusan növekvő elsődleges kulcs
+- `user_id` — a felhasználó azonosítója (idegen kulcs a `users` táblából)
+- `movie_id` — a film azonosítója (idegen kulcs a `movies` táblából)
+- `rating` — értékelés 1 és 10 között (ellenőrzés a `CHECK` megkötéssel)
 
-name — színész neve, kötelező
+---
 
-movie_cast
-id — automatikusan növekvő elsődleges kulcs
+Ez a séma lehetővé teszi a **felhasználók, filmek, színészek, kritikák és értékelések kezelését** egy tiszta, relációs adatbázisban.
 
-movie_id — a film azonosítója (idegen kulcs a movies táblából)
-
-actor_id — a színész azonosítója (idegen kulcs az actors táblából)
-
-role_name — a színész szerepének neve a filmben
-
-reviews
-id — automatikusan növekvő elsődleges kulcs
-
-user_id — a felhasználó azonosítója (idegen kulcs a users táblából)
-
-movie_id — a film azonosítója (idegen kulcs a movies táblából)
-
-text — a kritika szövege
-
-created_at — a kritika létrehozásának dátuma és ideje (alapértelmezett a beszúrás ideje)
-
-ratings
-id — automatikusan növekvő elsődleges kulcs
-
-user_id — a felhasználó azonosítója (idegen kulcs a users táblából)
-
-movie_id — a film azonosítója (idegen kulcs a movies táblából)
-
-rating — értékelés 1 és 10 között (ellenőrzés a CHECK megkötéssel)
 
 ## 🔒 Admin elérés
 
