@@ -276,3 +276,72 @@ select {
   background-color: #c0392b;
 }
 
+/* Admin Panel Styles */
+.admin-container {
+  max-width: 900px;
+  margin: 80px auto 40px auto;
+  padding: 20px;
+  background: linear-gradient(to bottom right, #2c3e50, #1e1e1e);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 223, 186, 0.2);
+  color: #f0f0f0;
+  font-family: Arial, sans-serif;
+}
+
+.admin-container h2 {
+  color: #ffe082;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.review-card {
+  background-color: #34495e;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.review-card strong {
+  font-size: 1.1em;
+  color: #f39c12;
+}
+
+.review-card em {
+  font-style: normal;
+  color: #bdc3c7;
+  font-size: 0.9em;
+}
+
+.review-card p {
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+/* Delete button */
+.review-card form {
+  text-align: right;
+}
+.review-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.review-card strong {
+  font-size: 1.3em;      /* nagyobb betűméret */
+  font-weight: bold;     /* félkövér */
+  color: #f39c12;        /* maradhat ez a szín */
+}
+
+.review-card em {
+  font-style: normal;
+  color: #bdc3c7;
+  font-size: 0.9em;
+  margin-left: 10px;
+  position: static;  /* biztosítsuk, hogy normál flow-ban legyen */
+}
+
+

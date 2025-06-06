@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Admin Panel</title>
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <h2>Admin felület</h2>
-  <p><a href="/">← Vissza a főoldalra</a></p>
+  <header>
+    <h1>Filmkatalógus Admin</h1>
+  </header>
 
-  <h3>Kritikák moderálása</h3>
-  <% reviews.forEach(r => { %>
-    <div style="border:1px solid #444; padding:1rem; margin-bottom:1rem;">
-      <strong><%= r.name %></strong> a(z) <em><%= r.title_hu %></em> filmhez:
-      <p><%= r.text %></p>
-      <form method="POST" action="/admin/delete-review/<%= r.review_id %>">
-        <button type="submit">Törlés</button>
-      </form>
-    </div>
-  <% }) %>
+  <main class="admin-container">
+    <h2>Kritikák moderálása</h2>
+
+    <% if (reviews.length === 0) { %>
+      <p>Nincsenek kritikák.</p>
+    <% } else { %>
+      <% reviews.forEach(r => { %>
+        <div class="review-card">
+        <header>
+            <strong><%= r.name %></strong>
+            <em><%= new Date(r.created_at).toLocaleDateString() %></em>
+        </header>
+        <p><strong>Film:</strong> <em><%= r.title_hu %></em></p>
+        <p><%= r.text %></p>
+        <form method="POST" action="/admin/delete-review/<%= r.review_id %>">
+            <button type="submit">Törlés</button>
+        </form>
+        </div>
+
+      <% }) %>
+    <% } %>
+  </main>
+
+  <footer style="text-align:center; padding:15px; background:#2c3e50; color:#ccc;">
+    &copy; 2025 Filmkatalógus
+  </footer>
 </body>
 </html>
