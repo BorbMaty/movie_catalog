@@ -51,12 +51,68 @@ node app.js
 
 Az alkalmazás elérhető: [http://localhost:3000](http://localhost:3000)
 
-## 🖼 Példa adatbázis szerkezet
+## 📦 Adatbázis szerkezet
+A filmkatalogus adatbázis a következő táblákat tartalmazza:
 
-- users (id, name, email, password, role)
-- movies (id, title_hu, title_en, year, duration, description, cover_image)
-- reviews (id, user_id, movie_id, text, created_at)
-- ratings (user_id, movie_id, rating)
+users
+id — automatikusan növekvő elsődleges kulcs
+
+email — egyedi email cím, kötelező
+
+password — hashelt jelszó, kötelező
+
+name — felhasználó neve (nem kötelező)
+
+role — felhasználói szerep, 'user' vagy 'admin', alapértelmezett 'user'
+
+movies
+id — automatikusan növekvő elsődleges kulcs
+
+title_hu — film magyar címe, kötelező
+
+title_en — film angol címe (nem kötelező)
+
+description — film leírása
+
+year — megjelenési év
+
+duration — film hossza percben
+
+cover_image — a borítókép relatív útvonala
+
+actors
+id — automatikusan növekvő elsődleges kulcs
+
+name — színész neve, kötelező
+
+movie_cast
+id — automatikusan növekvő elsődleges kulcs
+
+movie_id — a film azonosítója (idegen kulcs a movies táblából)
+
+actor_id — a színész azonosítója (idegen kulcs az actors táblából)
+
+role_name — a színész szerepének neve a filmben
+
+reviews
+id — automatikusan növekvő elsődleges kulcs
+
+user_id — a felhasználó azonosítója (idegen kulcs a users táblából)
+
+movie_id — a film azonosítója (idegen kulcs a movies táblából)
+
+text — a kritika szövege
+
+created_at — a kritika létrehozásának dátuma és ideje (alapértelmezett a beszúrás ideje)
+
+ratings
+id — automatikusan növekvő elsődleges kulcs
+
+user_id — a felhasználó azonosítója (idegen kulcs a users táblából)
+
+movie_id — a film azonosítója (idegen kulcs a movies táblából)
+
+rating — értékelés 1 és 10 között (ellenőrzés a CHECK megkötéssel)
 
 ## 🔒 Admin elérés
 
