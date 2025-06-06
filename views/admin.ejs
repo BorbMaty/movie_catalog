@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h2>Admin felület</h2>
+  <p><a href="/">← Vissza a főoldalra</a></p>
+
+  <h3>Kritikák moderálása</h3>
+  <% reviews.forEach(r => { %>
+    <div style="border:1px solid #444; padding:1rem; margin-bottom:1rem;">
+      <strong><%= r.name %></strong> a(z) <em><%= r.title_hu %></em> filmhez:
+      <p><%= r.text %></p>
+      <form method="POST" action="/admin/delete-review/<%= r.review_id %>">
+        <button type="submit">Törlés</button>
+      </form>
+    </div>
+  <% }) %>
+</body>
+</html>

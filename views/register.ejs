@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Regisztráció</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>Filmkatalógus</h1>
+  </header>
+
+  <main class="container">
+    <form method="post" action="/register">
+      <h2>Üdv a fedélzeten! 🚀</h2>
+
+      <% if (error) { %>
+        <div class="error"><%= error %></div>
+      <% } %>
+
+      <input type="text" name="name" placeholder="Neved" required>
+      <input type="email" name="email" placeholder="Email címed" required>
+      <input type="password" name="password" placeholder="Válassz jelszót" required>
+
+      <button type="submit">Regisztrálok</button>
+
+      <p>Van már fiókod? <a href="/login">Bejelentkezés</a></p>
+    </form>
+  </main>
+
+  <footer>
+    &copy; 2025 Filmkatalógus
+  </footer>
+</body>
+</html>

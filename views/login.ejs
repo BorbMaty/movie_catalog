@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Bejelentkezés</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>Filmkatalógus</h1>
+  </header>
+        <main class="container">
+        <form method="post" action="/login">
+            <h2>Üdv újra! 🌟</h2>
+
+            <% if (error) { %>
+            <div class="error"><%= error %></div>
+            <% } %>
+
+            <input type="email" name="email" placeholder="Email címed" required>
+            <input type="password" name="password" placeholder="Jelszavad" required>
+            <button type="submit">Bejelentkezem</button>
+
+            <p>Még nincs fiókod? <a href="/register">Regisztrálj most</a></p>
+        </form>
+        </main>
+  <footer>
+    &copy; 2025 Filmkatalógus
+  </footer>
+</body>
+</html>

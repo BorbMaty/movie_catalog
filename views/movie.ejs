@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title><%= movie.title_hu %> - Filmkatalógus</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <h1>Filmkatalógus</h1>
+
+    <div class="nav-buttons">
+        <% if (session && session.userName) { %>
+            <span style="color: #ccc;">Bejelentkezve: <%= session.userName %></span>
+        <% if (session.role === 'admin') { %>
+            <a href="/admin" class="admin">Admin panel</a>
+        <% } %>
+            <a href="/logout" class="logout">Kijelentkezés</a>
+        <% } else { %>
+            <a href="/register" class="admin">Regisztráció</a>
+            <a href="/login" class="logout">Bejelentkezés</a>
+        <% } %>
+    </div>
+
+
+  </header>
+        <main class="container">
+  <article class="movie-detail">
+    <div class="movie-text">
+      <h2><%= movie.title_hu %> (<%= movie.year %>)</h2>
+      <p><strong>Eredeti cím:</strong> <%= movie.title_en %></p>
+      <p><strong>Hossz:</strong> <%= movie.duration %> perc</p>
+      <p><strong>Szereplők:</strong> <%= movie.cast_list || 'Nincs megadva' %></p>
+      <p><strong>Átlagos értékelés:</strong> <%= movie.avg_rating || 'Nincs még' %>/10</p>
+      <p><%= movie.description %></p>
+    </div>
+    <div class="movie-image">
+        <img src="/<%= movie.cover_image %>" alt="borító">
+    </div>
+
+  </article>
+
+  <section>
+    <h3 style="color: #f1c40f;">Kritikák</h3>
+
+    <% if (reviews.length === 0) { %>
+      <p>Nincsenek kritikák.</p>
+    <% } else { %>
+      <% reviews.forEach(r => { %>
+        <div class="review-box">
+          <strong><%= r.name %></strong>
+          <em style="float: right;"><%= new Date(r.created_at).toLocaleDateString() %></em>
+          <p style="margin-top: 0.5rem;"><%= r.text %></p>
+        </div>
+      <% }) %>
+    <% } %>
+  </section>
+
+  <% if (session && session.userId) { %>
+    <h3>Új kritika és értékelés</h3>
+    <form class="review-form" action="/movie/<%= movie.id %>/review" method="POST">
+      <textarea name="text" placeholder="Írd meg a véleményed..." required></textarea>
+      <label for="rating">Értékelés (1-10):</label>
+      <select name="rating" id="rating" required>
+        <% for (let i = 1; i <= 10; i++) { %>
+          <option value="<%= i %>"><%= i %></option>
+        <% } %>
+      </select>
+      <button type="submit">Beküldés</button>
+    </form>
+  <% } else { %>
+    <p><a href="/login">Jelentkezz be</a> kritikák beküldéséhez.</p>
+  <% } %>
+</main>
+
+  <footer>
+    &copy; 2025 Filmkatalógus
+  </footer>
+</body>
+</html>

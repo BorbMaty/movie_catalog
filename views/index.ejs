@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Filmkatalógus</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<nav style="text-align: center; margin-bottom: 1rem;">
+  <% if (session && session.userName) { %>
+    <span style="margin-right: 1rem; color: #aaa;">Bejelentkezve: <%= session.userName %></span>
+    <a href="/logout" style="color: #f88;">Kijelentkezés</a>
+  <% } else { %>
+    <a href="/register" style="margin-right: 1rem; color: #ccc;">Regisztráció</a>
+    <a href="/login" style="color: #ccc;">Bejelentkezés</a>
+  <% } %>
+</nav>
+
+  <h1>Filmkatalógus</h1>
+
+  <form method="get" action="/">
+    <input type="text" name="q" placeholder="Keresés cím alapján..." value="<%= query %>">
+    <button type="submit">Keresés</button>
+  </form>
+
+  <div class="grid">
+    <% movies.forEach(movie => { %>
+      <div class="movie">
+        <a href="/movie/<%= movie.id %>">
+          <img src="/<%= movie.cover_image %>" alt="<%= movie.title_hu %>">
+        </a>
+        <p><%= movie.title_hu %></p>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>
