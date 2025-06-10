@@ -5,7 +5,7 @@ const { requireLogin, requireAdmin } = require('../middleware/auth'); // Hiteles
 // ADMIN PANEL MEGJELENÍTÉSE
 router.get('/admin', requireLogin, requireAdmin, (req, res) => { 
   req.db.query( 
-    `SELECT r.id AS review_id, r.text, r.created_at, u.name, m.title_hu  // Lekérdezi a kritikákat, felhasználókat és filmeket
+    `SELECT r.id AS review_id, r.text, r.created_at, u.name, m.title_hu  
      FROM reviews r
      JOIN users u ON r.user_id = u.id
      JOIN movies m ON r.movie_id = m.id`,

@@ -28,7 +28,7 @@ module.exports = router; // Filmek útvonalak kezelése
 router.get('/movie/:id', (req, res) => { // Film részleteinek megjelenítése
   const movieId = req.params.id; // Film azonosítója az URL-ből
 
-  const sql = ` // Lekérdezi a film adatait, szereplőit és átlagos értékelését
+  const sql = ` 
     SELECT m.*, 
            GROUP_CONCAT(DISTINCT CONCAT(a.name, ' as ', mc.role_name) SEPARATOR ', ') AS cast_list,
            ROUND(AVG(rat.rating), 1) AS avg_rating
@@ -45,7 +45,7 @@ router.get('/movie/:id', (req, res) => { // Film részleteinek megjelenítése
 
     const movie = movieResult[0]; // Az első találatot vesszük, mivel az ID egyedi
 
-    const reviewSql = ` // Lekérdezi a filmhez tartozó kritikákat és a felhasználók nevét
+    const reviewSql = ` 
       SELECT u.name, r.text, r.created_at
       FROM reviews r
       JOIN users u ON r.user_id = u.id
