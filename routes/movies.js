@@ -4,7 +4,7 @@ const { requireLogin, requireAdmin } = require('../middleware/auth'); // Hiteles
 
 
 
-// Home route: list of movies
+
 router.get('/',requireLogin, (req, res) => { // Home oldal, ahol a filmek listája jelenik meg
   const search = req.query.q || ''; // Always defined
 
